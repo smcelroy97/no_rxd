@@ -1,5 +1,5 @@
 
-TITLE Nitric Oxide Diffusion
+TITLE Voxel of Nitric Oxide Diffusion
 
 COMMENT Equations from
         Pablo Fernandez Lopez, Patricio Garcia Baez, and Carmen Paz Suarez Araujo. Nitric Oxide Diﬀusion and Multi-compartmental
@@ -8,29 +8,30 @@ COMMENT Equations from
         Instituto Universitario de Ciencias y Tecnologias Cibernticas,
         Universidad de Las Palmas de Gran Canaria
 
-        Adapted to be used in NetPyNE by Scott McElroy
+        Adapted to be used in NEURON and NetPyNE by Scott McElroy
+        SUNY Downstate scott.mcelroy@downstate.edu
 ENDCOMMENT
 
 NEURON {
-    SUFFIX no_voxel
+    POINT_PROCESS no_voxel
     RANGE conc, dx_pos, dx_neg, dy_pos, dy_neg, dz_pos, dz_neg, lam, F
     POINTER conc_xp, conc_xn, conc_yp, conc_yn, conc_zp, conc_zn
 }
 
 UNITS {
+    (molar) = (1/liter)
     (nM) = (nanomolar)
-    (s) = (second)
 }
 
 PARAMETER {
-    dx_pos = 0 (1/s)
-    dx_neg = 0 (1/s)
-    dy_pos = 0 (1/s)
-    dy_neg = 0 (1/s)
-    dz_pos = 0 (1/s)
-    dz_neg = 0 (1/s)
-    lam    = 0 (1/s)
-    F      = 0 (nM/s)
+    dx_pos = 0 (1/ms)
+    dx_neg = 0 (1/ms)
+    dy_pos = 0 (1/ms)
+    dy_neg = 0 (1/ms)
+    dz_pos = 0 (1/ms)
+    dz_neg = 0 (1/ms)
+    lam    = 0 (1/ms)
+    F      = 0 (nM/ms)
 }
 
 ASSIGNED {
@@ -48,6 +49,10 @@ STATE {
 
 INITIAL {
     conc = 0
+}
+
+BREAKPOINT {
+    SOLVE diffusion METHOD cnexp
 }
 
 DERIVATIVE diffusion {
