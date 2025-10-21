@@ -17,3 +17,4 @@ ray/
 *ssh_key.json
 *screenlog.0
 simOutput/
+*.DS_Store
