@@ -10,11 +10,11 @@ netParams = specs.NetParams()
 
 # simple spherical cell with a soma section
 cellRule = {'conds': {'cellType': 'voxelhost', 'cellModel': 'HH'},
-            'secs': {'soma': {'geom': {'L':10, 'diam':10}, 'mechs': {}}}}
+            'secs': {'soma': {'geom': {'L': 10, 'diam': 10}, 'mechs': {}}}}
 netParams.cellParams['VoxelHost'] = cellRule
 
 # population of 3 “cells” (each will host one voxel)
-netParams.popParams['VoxelPop'] = {'cellType': 'voxelhost','cellModel': 'HH' , 'numCells': 3}
+netParams.popParams['VoxelPop'] = {'cellType': 'voxelhost', 'cellModel': 'HH', 'numCells': 3}
 
 ###############################################################################
 # 2. Simulation configuration
@@ -38,6 +38,8 @@ cells = sim.net.cells
 # This function makes each pointer for neighboring concentrations point
 # to its own soma as a placeholder before being overwritten later.
 # This prevents this voxels at end points and corners from pointing outside of the voxel lattice
+
+
 def init_voxel(vox):
     h.setpointer(vox._ref_conc, 'conc_xp', vox)
     h.setpointer(vox._ref_conc, 'conc_xn', vox)
@@ -45,6 +47,7 @@ def init_voxel(vox):
     h.setpointer(vox._ref_conc, 'conc_yn', vox)
     h.setpointer(vox._ref_conc, 'conc_zp', vox)
     h.setpointer(vox._ref_conc, 'conc_zn', vox)
+
 
 # Insert no_voxel point process at soma(0.5) for each
 voxels = []
@@ -78,7 +81,8 @@ voxels[2].lam = 0.01
 # symmetric diffusion coupling (1 <-> 2 <-> 3)
 D = 0.05  # /ms
 voxels[0].dx_pos = D
-voxels[1].dx_neg = D; voxels[1].dx_pos = D
+voxels[1].dx_neg = D
+voxels[1].dx_pos = D
 voxels[2].dx_neg = D
 
 # set POINTER links
@@ -112,5 +116,3 @@ plt.xlabel('Time (ms)')
 plt.ylabel('NO conc (nM)')
 plt.legend()
 plt.savefig('test_conc_lines.png')
-
-

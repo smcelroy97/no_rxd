@@ -14,7 +14,7 @@ ENDCOMMENT
 
 NEURON {
     POINT_PROCESS no_voxel
-    RANGE conc, dx_pos, dx_neg, dy_pos, dy_neg, dz_pos, dz_neg, lam, F
+    RANGE conc, conc0, dx_pos, dx_neg, dy_pos, dy_neg, dz_pos, dz_neg, lam, F
     POINTER conc_xp, conc_xn, conc_yp, conc_yn, conc_zp, conc_zn
 }
 
@@ -24,6 +24,7 @@ UNITS {
 }
 
 PARAMETER {
+    conc0  = 0 (nM)
     dx_pos = 0 (1/ms)
     dx_neg = 0 (1/ms)
     dy_pos = 0 (1/ms)
@@ -48,7 +49,7 @@ STATE {
 }
 
 INITIAL {
-    conc = 0
+    conc = conc0
 }
 
 BREAKPOINT {
@@ -56,8 +57,14 @@ BREAKPOINT {
 }
 
 DERIVATIVE diffusion {
-    conc' = - (dx_pos + dx_neg + dy_pos + dy_neg + dz_pos + dz_neg + lam) * conc + F
-          + (dx_pos * conc_xp) + (dx_neg * conc_xn)
-          + (dy_pos * conc_yp) + (dy_neg * conc_yn)
-          + (dz_pos * conc_zp) + (dz_neg * conc_zn)
+    LOCAL dCdiff
+    dCdiff = 0
+    dCdiff = dCdiff + dx_pos*(conc_xp - conc)
+    dCdiff = dCdiff + dx_neg*(conc_xn - conc)
+    dCdiff = dCdiff + dy_pos*(conc_yp - conc)
+    dCdiff = dCdiff + dy_neg*(conc_yn - conc)
+    dCdiff = dCdiff + dz_pos*(conc_zp - conc)
+    dCdiff = dCdiff + dz_neg*(conc_zn - conc)
+
+    conc' = dCdiff - lam*conc + F
 }
