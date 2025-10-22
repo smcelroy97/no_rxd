@@ -45,7 +45,7 @@ cfg.TEpops = ['TC', 'TCM', 'HTC']
 cfg.TIpops = ['IRE', 'IREM', 'TI', 'TIM']
 
 cfg.allpops = cfg.TEpops + cfg.TIpops
-cfg.recordCells = cfg.allpops
+cfg.recordPops = cfg.allpops
 
 cfg.recordTraces = {'V_soma': {'sec': 'soma', 'loc': 0.5, 'var': 'v'}
                     # 'g_GABAA_NO': {'sec': 'soma', 'loc': 0.5, 'synMech': 'GABAA_NO', 'var': 'g'}
@@ -63,7 +63,7 @@ cfg.saveDataInclude = ['simData', 'simConfig', 'netParams', 'net']
 cfg.backupCfgFile = None
 cfg.gatherOnlySimData = False
 cfg.saveCellSecs = False
-cfg.saveCellConns = False
+cfg.saveCellConns = True
 
 # ------------------------------------------------------------------------------
 # Network
@@ -74,7 +74,6 @@ cfg.singleCellPops = False
 cfg.reducedPop = False  # insert number to declare specific number of populations, if going for full model set to False
 cfg.singlePop = ''
 cfg.removeWeightNorm = False
-cfg.scale = 1.0  # Is this what should be used?
 cfg.cube_side_len = 11
 cfg.sizeX = cfg.cube_side_len * 10
 cfg.sizeY = cfg.cube_side_len * 10

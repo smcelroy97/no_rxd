@@ -44,6 +44,9 @@ netParams.defaultDelay = 2.0  # default conn delay (ms)
 netParams.propVelocity = 500.0  # propagation velocity (um/ms)
 netParams.probLambda = 100.0  # length constant (lambda) for connection probability decay (um)
 ThalamicCoreLambda = 50.0
+netParams.sizeX = cfg.sizeX  # x-dimension (horizontal length) size in um
+netParams.sizeY = cfg.sizeY  # y-dimension (vertical height or cortical depth) size in um
+netParams.sizeZ = cfg.sizeZ  # z-dimension (horizontal depth) size in um
 
 # ------------------------------------------------------------------------------
 # Population parameters
@@ -68,13 +71,13 @@ netParams.popParams['VoxelPop'] = {
 ### THALAMIC POPULATIONS (from prev model)
 thalDensity = density[('A1', 'PV')][2] * 1.25  # temporary estimate (from prev model)
 
-netParams.popParams['TC'] = {'cellType': 'TC', 'cellModel': 'HH_reduced', 'ynormRange': [55, 110], 'density': 0.75 * thalDensity}
-netParams.popParams['TCM'] = {'cellType': 'TC', 'cellModel': 'HH_reduced', 'ynormRange': [55, 110], 'density': thalDensity}
-netParams.popParams['HTC'] = {'cellType': 'HTC', 'cellModel': 'HH_reduced', 'ynormRange': [55, 110], 'density': 0.25 * thalDensity}
-netParams.popParams['IRE'] = {'cellType': 'RE', 'cellModel': 'HH_reduced', 'ynormRange': [0, 55], 'density': thalDensity}
-netParams.popParams['IREM'] = {'cellType': 'RE', 'cellModel': 'HH_reduced', 'ynormRange': [0, 55], 'density': thalDensity}
-netParams.popParams['TI'] = {'cellType': 'TI', 'cellModel': 'HH_reduced', 'ynormRange': [55, 110], 'density': 0.33 * thalDensity}  # Winer & Larue 1996; Huang et al 1999
-netParams.popParams['TIM'] = {'cellType': 'TI', 'cellModel': 'HH_reduced', 'ynormRange': [55, 110], 'density': 0.33 * thalDensity}  # Winer & Larue 1996; Huang et al 1999
+netParams.popParams['TC'] = {'cellType': 'TC', 'cellModel': 'HH_reduced', 'yRange': [55, 110], 'density': 0.75 * thalDensity}
+netParams.popParams['TCM'] = {'cellType': 'TC', 'cellModel': 'HH_reduced', 'yRange': [55, 110], 'density': thalDensity}
+netParams.popParams['HTC'] = {'cellType': 'HTC', 'cellModel': 'HH_reduced', 'yRange': [55, 110], 'density': 0.25 * thalDensity}
+netParams.popParams['IRE'] = {'cellType': 'RE', 'cellModel': 'HH_reduced', 'yRange': [0, 50], 'density': thalDensity}
+netParams.popParams['IREM'] = {'cellType': 'RE', 'cellModel': 'HH_reduced', 'yRange': [0, 50], 'density': thalDensity}
+netParams.popParams['TI'] = {'cellType': 'TI', 'cellModel': 'HH_reduced', 'yRange': [55, 110], 'density': 0.33 * thalDensity}  # Winer & Larue 1996; Huang et al 1999
+netParams.popParams['TIM'] = {'cellType': 'TI', 'cellModel': 'HH_reduced', 'yRange': [55, 110], 'density': 0.33 * thalDensity}  # Winer & Larue 1996; Huang et al 1999
 
 # ------------------------------------------------------------------------------
 # Synaptic mechanism parameters
@@ -92,6 +95,13 @@ netParams.synMechParams['AMPA'] = {
     'tau1': 0.05,
     'tau2': 5.3,
     'e': 0
+}
+
+netParams.synMechParams['GABAA'] = {
+    'mod': 'MyExp2SynBB',
+    'tau1': 0.07,
+    'tau2': 18.2,
+    'e': -80
 }
 
 netParams.synMechParams['GABAB'] = {
@@ -158,15 +168,15 @@ for pre in TEpops + TIpops:
                 synWeightFactor = cfg.synWeightFractionThalII
                 gain *= cfg.intraThalamicIIGain
             # use spatially dependent wiring between thalamic core excitatory neurons
-            if (pre == 'TC' and (post == 'TC' or post == 'HTC')) or (pre == 'HTC' and (post == 'TC' or post == 'HTC')):
-                prob = '%f * exp(-dist_x/%f)' % (pmat[pre][post], ThalamicCoreLambda)
-            else:
-                prob = pmat[pre][post]
+            # if (pre == 'TC' and (post == 'TC' or post == 'HTC')) or (pre == 'HTC' and (post == 'TC' or post == 'HTC')):
+            #     prob = '%f * exp(-dist_x/%f)' % (pmat[pre][post], ThalamicCoreLambda)
+            # else:
+            prob = pmat[pre][post]
             netParams.connParams['ITh_' + pre + '_' + post] = {
                 'preConds': {'pop': pre},
                 'postConds': {'pop': post},
                 'synMech': syn,
-                'probability': prob,
+                'probability': 1,
                 'weight': wmat[pre][post] * gain,
                 'synMechWeightFactor': synWeightFactor,
                 'delay': 'defaultDelay+dist_3D/propVelocity',
@@ -215,8 +225,8 @@ if cfg.addBkgConn:
 
         netParams.stimTargetParams['inhBkg->'+pop] = {
             'source': 'inhBkg',
-            'conds': {'soma': pop},
-            'sec': 'proximal',
+            'conds': {'pop': pop},
+            'sec': 'soma',
             'loc': 0.5,
             'synMech': 'GABAA',
             'weight': weightBkg[pop],

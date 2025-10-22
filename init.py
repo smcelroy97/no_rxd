@@ -78,12 +78,12 @@ fvec = h.Vector([0, 0, 250, 250, 0, 0])
 fvec.play(voxels[center]._ref_F, tvec, 1)
 
 ###############################################################################
-# Record [NO]
+# Record and store [NO]
 ###############################################################################
 
+sim.simData['NO_conc'] = {}
 for key, vox in voxels.items():
     vec = h.Vector().record(vox._ref_conc)
-    sim.simData['NO_conc'] = {}
     sim.simData['NO_conc'][f"conc_{key}"] = vec
 
 ###############################################################################
@@ -91,6 +91,39 @@ for key, vox in voxels.items():
 ###############################################################################
 
 sim.net.connectCells()  # create connections between cells based on params
+
+GRID = cfg.cube_side_len
+
+
+def snap(v):  # nearest voxel center
+    return int(round(v / GRID)) * int(GRID)
+
+
+cell_to_voxel = {}
+for c in sim.net.cells:
+    if c.tags['pop'] == 'VoxelPop':
+        continue
+    else:
+        x, y, z = c.tags['x'], c.tags['y'], c.tags['z']
+        vkey = (snap(x), snap(y), snap(z))
+        if vkey not in voxels:
+            raise ValueError(f'No voxel at {vkey} for cell gid {c.gid}')
+        cell_to_voxel[c.gid] = vkey
+
+# 2) loop over postsynaptic cells and their conns; set POINTER on GABAA_NO synapses
+for c in sim.net.cells:
+    if c.tags['pop'] == 'VoxelPop':
+        continue
+    else:
+        vkey = cell_to_voxel[c.gid]  # NO field at postsynaptic site
+        for conn in c.conns:
+            # conn['synMech'] can be a string or list; normalize to list
+            mechs = conn['synMech'] if isinstance(conn['synMech'], list) else [conn['synMech']]
+            if 'GABAA_NO' in mechs:
+                syn = conn['hSyn']  # hoc POINT_PROCESS MyExp2SynBB_NO
+                # wire voxel -> synapse
+                h.setpointer(voxels[vkey]._ref_conc, 'no_conc', syn)
+
 sim.net.addStims()  # add network stimulation
 sim.setupRecording()  # setup variables to record for each cell (spikes, V traces, etc)
 sim.runSim()
