@@ -1,8 +1,0 @@
-no_diffusion.cpp: ../no_diffusion.mod $(NOCMODL)
-	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
-	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "no_diffusion.mod"  -o "/Users/scoot/no_rxd/mod/x86_64" )
-
-./no_diffusion.o: no_diffusion.cpp
-	@printf " -> $(C_GREEN)Compiling$(C_RESET) /Users/scoot/no_rxd/mod/x86_64/$<\\n"
-	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c "/Users/scoot/no_rxd/mod/x86_64/$<" -o $@
-
