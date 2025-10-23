@@ -13,6 +13,7 @@ COMMENT Equations from
 ENDCOMMENT
 
 NEURON {
+    THREADSAFE
     POINT_PROCESS no_voxel
     RANGE conc, conc0, dx_pos, dx_neg, dy_pos, dy_neg, dz_pos, dz_neg, lam, F
     POINTER conc_xp, conc_xn, conc_yp, conc_yn, conc_zp, conc_zn

@@ -36,6 +36,7 @@ cfg.oneSynPerNetcon = False
 cfg.includeParamsLabel = False
 cfg.validateNetParams = True
 cfg.use_coreNEURON = False
+cfg.nthreads = 1    
 
 # ------------------------------------------------------------------------------
 # Recording

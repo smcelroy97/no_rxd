@@ -3,6 +3,8 @@ from netpyne import sim
 from netParams import netParams, cfg
 from neuron import h
 import numpy as np
+pc = h.ParallelContext()
+
 
 sim.initialize(simConfig=cfg, netParams=netParams)  # create network object and set cfg and net params
 sim.net.createPops()  # instantiate network populations
@@ -19,10 +21,11 @@ def get_cell_coords(cell):
 
 
 voxels = {}
-for cell in sim.net.cells:
-    if cell.tags['pop'] == 'VoxelPop':
+for cell in sim.net.cells: 
+    if cell.tags['pop'] == 'VoxelPop':                     # sim.net.cells are local on this rank
         vox = h.no_voxel(cell.secs['soma']['hObj'](0.5))
         voxels[get_cell_coords(cell)] = vox
+
 
 ###############################################################################
 # Set voxel parameters
@@ -65,38 +68,41 @@ xs = sorted({x for x, _, _ in voxels})
 ys = sorted({y for _, y, _ in voxels})
 zs = sorted({z for _, _, z in voxels})
 
-center = (xs[len(xs)//2], ys[len(ys)//2], zs[len(zs)//2])
+# explicit grid constants — keep these consistent with your NetPyNE sizes
+GRID = cfg.cube_side_len  # 11.0 µm
+CENTER_KEY = (55, 55, 55)  # known center for 110-µm box (or compute it explicitly)
 
-assert center in voxels, f"center key {center} not in voxels!"
-idx = (xs.index(center[0]), ys.index(center[1]), zs.index(center[2]))
-assert idx == (len(xs)//2, len(ys)//2, len(zs)//2)
+# ... after you've created voxels from local cells ...
+if CENTER_KEY in voxels:
+    print(f"[host {int(pc.id())}] driving center voxel {CENTER_KEY}")
+if CENTER_KEY in voxels:
+    tvec = h.Vector([0, 420, 470, 570, 620, cfg.duration])
+    fvec = h.Vector([0,   0, 250, 250,   0,           0])  # nM/ms
 
-# Example case to drop in a pulse of NO to this cube
-tvec = h.Vector([0, 420, 470, 570, 620, cfg.duration])
-fvec = h.Vector([0, 0, 250, 250, 0, 0])
-fvec.play(voxels[center]._ref_F, tvec, 1)
+    # KEEP STRONG REFERENCES so GC won’t free them during the run
+    if not hasattr(sim, '_Fplays'):
+        sim._Fplays = []
+    sim._Fplays.append((tvec, fvec, voxels[CENTER_KEY]))
+
+    # fvec.play(voxels[CENTER_KEY]._ref_F, tvec, 1)
+
+def snap(v):  # nearest voxel center
+    return int(round(v / GRID)) * int(GRID)
 
 ###############################################################################
 # Record and store [NO]
 ###############################################################################
 
-sim.simData['NO_conc'] = {}
-for key, vox in voxels.items():
-    vec = h.Vector().record(vox._ref_conc)
-    sim.simData['NO_conc'][f"conc_{key}"] = vec
+# sim.simData['NO_conc'] = {}
+# for key, vox in voxels.items():
+#     vec = h.Vector().record(vox._ref_conc)
+#     sim.simData['NO_conc'][f"conc_{key}"] = vec
 
 ###############################################################################
 #  Run
 ###############################################################################
 
-# after connectCells():
 sim.net.connectCells()
-
-GRID = cfg.cube_side_len
-
-
-def snap(v):  # nearest voxel center
-    return int(round(v / GRID)) * int(GRID)
 
 
 # cell_to_voxel = {}
@@ -124,7 +130,7 @@ def snap(v):  # nearest voxel center
 #                 # wire voxel -> synapse
 #                 h.setpointer(voxels[vkey]._ref_conc, 'no_voxel', syn)
 
-# after addStims():
+
 sim.net.addStims()
 sim.setupRecording()  # setup variables to record for each cell (spikes, V traces, etc)
 
