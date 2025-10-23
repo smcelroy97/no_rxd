@@ -1,11 +1,7 @@
 {
     "conds": {
         "cellModel": "HH_reduced",
-        "cellType": "TC",
-        "ynorm": [
-            1.2,
-            1.4
-        ]
+        "cellType": "TC"
     },
     "globals": {
         "erev_kl": -95.0,

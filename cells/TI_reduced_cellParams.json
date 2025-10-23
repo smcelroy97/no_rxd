@@ -1,11 +1,7 @@
 {
     "conds": {
         "cellModel": "HH_reduced",
-        "cellType": "TI",
-        "ynorm": [
-            1.2,
-            1.4
-        ]
+        "cellType": "TI"
     },
     "globals": {
         "Cai0_Ca_ion": 5e-05,

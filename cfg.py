@@ -45,7 +45,8 @@ cfg.TEpops = ['TC', 'TCM', 'HTC']
 cfg.TIpops = ['IRE', 'IREM', 'TI', 'TIM']
 
 cfg.allpops = cfg.TEpops + cfg.TIpops
-cfg.recordPops = cfg.allpops
+
+# cfg.recordCells = ['all']
 
 cfg.recordTraces = {'V_soma': {'sec': 'soma', 'loc': 0.5, 'var': 'v'}
                     # 'g_GABAA_NO': {'sec': 'soma', 'loc': 0.5, 'synMech': 'GABAA_NO', 'var': 'g'}
@@ -81,21 +82,20 @@ cfg.sizeZ = cfg.cube_side_len * 10
 cfg.scaleDensity = 1.0  # Should be 1.0 unless need lower cell density for test simulation or visualization
 cfg.connRandomSecFromList = False  # set to false for reproducibility
 cfg.cvode_active = False
-cfg.addBkgConn = True
-
+cfg.addBkgConn = 1.0
 # ------------------------------------------------------------------------------
 # Analysis and plotting
 # ------------------------------------------------------------------------------
 
-cfg.analysis['plotTraces'] = {
-    'include': cfg.allpops,
-    'timeRange': [0, cfg.duration],
-    'oneFigPer': 'trace',
-    'overlay': True,
-    'saveFig': True,
-    'showFig': False,
-    'figSize': (12, 8)
-}
+# cfg.analysis['plotTraces'] = {
+#     'include': cfg.allpops,
+#     'timeRange': [0, cfg.duration],
+#     'oneFigPer': 'trace',
+#     'overlay': True,
+#     'saveFig': True,
+#     'showFig': False,
+#     'figSize': (12, 8)
+# }
 
 # ------------------------------------------------------------------------------
 # Synapses

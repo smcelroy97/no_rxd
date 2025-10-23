@@ -8,7 +8,6 @@ sim.initialize(simConfig=cfg, netParams=netParams)  # create network object and 
 sim.net.createPops()  # instantiate network populations
 sim.net.createCells()  # instantiate network cells based on defined populations
 
-
 def get_cell_coords(cell):
     tags = getattr(cell, 'tags', {}) or (cell.get('tags', {}) if isinstance(cell, dict) else {})
     x = tags['x']
@@ -90,7 +89,8 @@ for key, vox in voxels.items():
 #  Run
 ###############################################################################
 
-sim.net.connectCells()  # create connections between cells based on params
+# after connectCells():
+sim.net.connectCells()
 
 GRID = cfg.cube_side_len
 
@@ -99,33 +99,36 @@ def snap(v):  # nearest voxel center
     return int(round(v / GRID)) * int(GRID)
 
 
-cell_to_voxel = {}
-for c in sim.net.cells:
-    if c.tags['pop'] == 'VoxelPop':
-        continue
-    else:
-        x, y, z = c.tags['x'], c.tags['y'], c.tags['z']
-        vkey = (snap(x), snap(y), snap(z))
-        if vkey not in voxels:
-            raise ValueError(f'No voxel at {vkey} for cell gid {c.gid}')
-        cell_to_voxel[c.gid] = vkey
+# cell_to_voxel = {}
+# for c in sim.net.cells:
+#     if c.tags['pop'] == 'VoxelPop':
+#         continue
+#     else:
+#         x, y, z = c.tags['x'], c.tags['y'], c.tags['z']
+#         vkey = (snap(x), snap(y), snap(z))
+#         if vkey not in voxels:
+#             raise ValueError(f'No voxel at {vkey} for cell gid {c.gid}')
+#         cell_to_voxel[c.gid] = vkey
 
-# 2) loop over postsynaptic cells and their conns; set POINTER on GABAA_NO synapses
-for c in sim.net.cells:
-    if c.tags['pop'] == 'VoxelPop':
-        continue
-    else:
-        vkey = cell_to_voxel[c.gid]  # NO field at postsynaptic site
-        for conn in c.conns:
-            # conn['synMech'] can be a string or list; normalize to list
-            mechs = conn['synMech'] if isinstance(conn['synMech'], list) else [conn['synMech']]
-            if 'GABAA_NO' in mechs:
-                syn = conn['hSyn']  # hoc POINT_PROCESS MyExp2SynBB_NO
-                # wire voxel -> synapse
-                h.setpointer(voxels[vkey]._ref_conc, 'no_conc', syn)
+# # 2) loop over postsynaptic cells and their conns; set POINTER on GABAA_NO synapses
+# for c in sim.net.cells:
+#     if c.tags['pop'] == 'VoxelPop':
+#         continue
+#     else:
+#         vkey = cell_to_voxel[c.gid]  # NO field at postsynaptic site
+#         for conn in c.conns:
+#             # conn['synMech'] can be a string or list; normalize to list
+#             mechs = conn['synMech'] if isinstance(conn['synMech'], list) else [conn['synMech']]
+#             if 'GABAA_NO' in mechs:
+#                 syn = conn['hSyn']  # hoc POINT_PROCESS MyExp2SynBB_NO
+#                 # wire voxel -> synapse
+#                 h.setpointer(voxels[vkey]._ref_conc, 'no_voxel', syn)
 
-sim.net.addStims()  # add network stimulation
+# after addStims():
+sim.net.addStims()
 sim.setupRecording()  # setup variables to record for each cell (spikes, V traces, etc)
+
+
 sim.runSim()
 sim.gatherData()
 sim.saveData()

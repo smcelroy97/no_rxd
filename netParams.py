@@ -71,13 +71,14 @@ netParams.popParams['VoxelPop'] = {
 ### THALAMIC POPULATIONS (from prev model)
 thalDensity = density[('A1', 'PV')][2] * 1.25  # temporary estimate (from prev model)
 
-netParams.popParams['TC'] = {'cellType': 'TC', 'cellModel': 'HH_reduced', 'yRange': [55, 110], 'density': 0.75 * thalDensity}
-netParams.popParams['TCM'] = {'cellType': 'TC', 'cellModel': 'HH_reduced', 'yRange': [55, 110], 'density': thalDensity}
-netParams.popParams['HTC'] = {'cellType': 'HTC', 'cellModel': 'HH_reduced', 'yRange': [55, 110], 'density': 0.25 * thalDensity}
-netParams.popParams['IRE'] = {'cellType': 'RE', 'cellModel': 'HH_reduced', 'yRange': [0, 50], 'density': thalDensity}
-netParams.popParams['IREM'] = {'cellType': 'RE', 'cellModel': 'HH_reduced', 'yRange': [0, 50], 'density': thalDensity}
-netParams.popParams['TI'] = {'cellType': 'TI', 'cellModel': 'HH_reduced', 'yRange': [55, 110], 'density': 0.33 * thalDensity}  # Winer & Larue 1996; Huang et al 1999
-netParams.popParams['TIM'] = {'cellType': 'TI', 'cellModel': 'HH_reduced', 'yRange': [55, 110], 'density': 0.33 * thalDensity}  # Winer & Larue 1996; Huang et al 1999
+
+netParams.popParams['TC'] = {'cellType': 'TC', 'cellModel': 'HH_reduced', 'ynormRange': [0.5, 1], 'numCells': 37}
+netParams.popParams['TCM'] = {'cellType': 'TC', 'cellModel': 'HH_reduced', 'ynormRange': [0.5, 1], 'numCells': 50}
+netParams.popParams['HTC'] = {'cellType': 'HTC', 'cellModel': 'HH_reduced', 'ynormRange': [0.5, 1], 'numCells': 12}
+netParams.popParams['IRE'] = {'cellType': 'RE', 'cellModel': 'HH_reduced', 'ynormRange': [0, 0.5], 'numCells': 50}
+netParams.popParams['IREM'] = {'cellType': 'RE', 'cellModel': 'HH_reduced', 'ynormRange': [0, 0.5], 'numCells': 50}
+netParams.popParams['TI'] = {'cellType': 'TI', 'cellModel': 'HH_reduced', 'ynormRange': [0.5, 1], 'numCells': 17}  # Winer & Larue 1996; Huang et al 1999
+netParams.popParams['TIM'] = {'cellType': 'TI', 'cellModel': 'HH_reduced', 'ynormRange': [0.5, 1], 'numCells': 17}  # Winer & Larue 1996; Huang et al 1999
 
 # ------------------------------------------------------------------------------
 # Synaptic mechanism parameters
@@ -168,15 +169,15 @@ for pre in TEpops + TIpops:
                 synWeightFactor = cfg.synWeightFractionThalII
                 gain *= cfg.intraThalamicIIGain
             # use spatially dependent wiring between thalamic core excitatory neurons
-            # if (pre == 'TC' and (post == 'TC' or post == 'HTC')) or (pre == 'HTC' and (post == 'TC' or post == 'HTC')):
-            #     prob = '%f * exp(-dist_x/%f)' % (pmat[pre][post], ThalamicCoreLambda)
-            # else:
-            prob = pmat[pre][post]
+            if (pre == 'TC' and (post == 'TC' or post == 'HTC')) or (pre == 'HTC' and (post == 'TC' or post == 'HTC')):
+                prob = '%f * exp(-dist_x/%f)' % (pmat[pre][post], ThalamicCoreLambda)
+            else:
+                prob = pmat[pre][post]
             netParams.connParams['ITh_' + pre + '_' + post] = {
                 'preConds': {'pop': pre},
                 'postConds': {'pop': post},
                 'synMech': syn,
-                'probability': 1,
+                'probability': prob,
                 'weight': wmat[pre][post] * gain,
                 'synMechWeightFactor': synWeightFactor,
                 'delay': 'defaultDelay+dist_3D/propVelocity',
