@@ -3,7 +3,7 @@ TITLE Exp2Syn with NO modulation (drop-in for MyExp2SynBB)
 NEURON {
     POINT_PROCESS MyExp2SynBB_NO
     RANGE tau1, tau2, e, i, g, gmax_base, alpha, K
-    POINTER no_conc          : read NO concentration (nM) from a voxel
+    RANGE no_local
     NONSPECIFIC_CURRENT i
 }
 
@@ -28,7 +28,7 @@ ASSIGNED {
     v (mV)
     i (nA)
     g (uS)
-    no_conc (nM)             : comes from voxel via POINTER
+    no_local (nM)             : comes from voxel via POINTER
     scale
 }
 
@@ -41,7 +41,7 @@ BREAKPOINT {
     SOLVE states METHOD cnexp
 
     : --- NO modulation law ---
-    : Saturating gain: scale = 1 + alpha * (no_conc / (K + no_conc))
+    : Saturating gain: scale = 1 + alpha * (no_local / (K + no_local))
     : If you want linear small-signal, set K very large (e.g., 1e9 nM)
     scale = 1 + alpha * (no_conc / (K + no_conc))
 

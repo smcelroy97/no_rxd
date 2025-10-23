@@ -4,3 +4,4 @@ ray/
 simOutput/
 *.png
 *_data.pkl
+*.out
