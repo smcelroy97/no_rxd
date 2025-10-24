@@ -130,8 +130,9 @@ netParams.synMechParams['GABAA_NO'] = {
 }
 
 ESynMech = ['AMPA', 'NMDA']
-ThalIESynMech = ['GABAA_NO', 'GABAB']
+ThalIESynMech = ['GABAA_Slow', 'GABAB']
 ThalIISynMech = ['GABAASlow']
+RETCSynMech = ['GABAA_Slow', 'GABAB']
 
 with open('conn/conn.pkl', 'rb') as fileObj:
     connData = pickle.load(fileObj)
@@ -161,9 +162,14 @@ for pre in TEpops + TIpops:
                 else:
                     gain = cfg.intraThalamicEIGain
             elif post in TEpops:  # I->E
-                syn = ThalIESynMech
-                synWeightFactor = cfg.synWeightFractionThalIE
-                gain *= cfg.intraThalamicIEGain
+                if pre == 'IRE' or 'IREM':
+                    syn = RETCSynMech
+                    synWeightFactor = cfg.synWeightFractionThalIE
+                    gain *= cfg.intraThalamicIEGain
+                else:
+                    syn = ThalIESynMech
+                    synWeightFactor = cfg.synWeightFractionThalIE
+                    gain *= cfg.intraThalamicIEGain
             else:  # I->I
                 syn = ThalIISynMech
                 synWeightFactor = cfg.synWeightFractionThalII

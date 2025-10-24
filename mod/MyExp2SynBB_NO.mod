@@ -43,7 +43,7 @@ BREAKPOINT {
     : --- NO modulation law ---
     : Saturating gain: scale = 1 + alpha * (no_local / (K + no_local))
     : If you want linear small-signal, set K very large (e.g., 1e9 nM)
-    scale = 1 + alpha * (no_conc / (K + no_conc))
+    scale = 1 + alpha * (no_local / (K + no_local))
 
     g = (B - A) * scale
     i = g * (v - e)
