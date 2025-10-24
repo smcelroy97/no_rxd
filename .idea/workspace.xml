@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c20e5f45-da3f-442c-95aa-576e1a4f545f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/init.py" beforeDir="false" afterPath="$PROJECT_DIR$/init.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/MyExp2SynBB_NO.mod" beforeDir="false" afterPath="$PROJECT_DIR$/mod/MyExp2SynBB_NO.mod" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -228,7 +228,7 @@
       <workItem from="1761123867718" duration="4485000" />
       <workItem from="1761148791852" duration="1619000" />
       <workItem from="1761207326329" duration="8678000" />
-      <workItem from="1761296391048" duration="3764000" />
+      <workItem from="1761296391048" duration="4052000" />
     </task>
     <servers />
   </component>

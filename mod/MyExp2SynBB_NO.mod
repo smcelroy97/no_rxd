@@ -43,7 +43,7 @@ BREAKPOINT {
     : --- NO modulation law ---
     : Saturating gain: scale = 1 + alpha * (no_local / (K + no_local))
     : If you want linear small-signal, set K very large (e.g., 1e9 nM)
-    scale = 1 + alpha * (no_local / (K + no_local))
+    scale = 1 + alpha * (no_local/ (K + no_local))
 
     g = (B - A) * scale
     i = g * (v - e)
@@ -52,6 +52,13 @@ BREAKPOINT {
 DERIVATIVE states {
     A' = -A/tau1
     B' = -B/tau2
+}
+
+NET_RECEIVE (w) {
+    : Keep same weight semantics as your MyExp2SynBB:
+    : bump both states by w*gmax_base on each event
+    A = A + w * gmax_base
+    B = B + w * gmax_base
 }
 
 NET_RECEIVE (w) {
