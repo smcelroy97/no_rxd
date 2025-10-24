@@ -32,6 +32,10 @@ sim.net.connectCells()
 sim.net.addStims()
 sim.setupRecording()   # spikes, V traces, etc. (doesn't include NO; we'll handle NO below)
 
+if hasattr(pc, 'set_maxstep'):
+    pc.set_maxstep(1.0)   # ms
+
+
 # ---------- helpers ----------
 GRID = cfg.cube_side_len      # e.g. 11.0 µm
 BOX  = (cfg.sizeX, cfg.sizeY, cfg.sizeZ)  # e.g. (110,110,110)
@@ -97,7 +101,7 @@ print(f"[rank {rank}] NO-freq targets on this rank: {len(freq_targets)}")
 # --- NO -> rate parameters (tune) ---
 R0   = 1.0    # Hz baseline minis
 RMAX = 10.0   # Hz additional at high NO
-KNO  = 100.0  # nM half-saturation
+KNO  = 1.0  # nM half-saturation
 W    = 1.0    # NetCon weight (keeps amplitude constant)
 
 def rate_from_NO(NO_nM):
@@ -150,7 +154,7 @@ if rank == 0:
 
     # Example: play any F schedule you want (only on rank 0)
     tvec = h.Vector([0, 420, 470, 570, 620, cfg.duration])
-    fvec = h.Vector([0,   0, 250, 250,   0,           0])  # nM/ms
+    fvec = h.Vector([0,   0, 2.5, 2.5,   0,           0])  # nM/ms
     fvec.play(voxels_rank0[center_key]._ref_F, tvec, 1)
 
 pc.barrier()
