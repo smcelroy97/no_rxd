@@ -60,10 +60,3 @@ NET_RECEIVE (w) {
     A = A + w * gmax_base
     B = B + w * gmax_base
 }
-
-NET_RECEIVE (w) {
-    : Keep same weight semantics as your MyExp2SynBB:
-    : bump both states by w*gmax_base on each event
-    A = A + w * gmax_base
-    B = B + w * gmax_base
-}

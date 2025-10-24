@@ -55,7 +55,7 @@ offsets = {
 # --- who to target ---
 PRE_OK   = {'IRE', 'IREM'}
 POST_OK  = {'TC', 'TCM', 'HTC'}
-GABA_MECHS = {'RETCSynMech'}   # edit to your actual names
+GABA_MECHS = {'RETCSynMech', 'GABAA_NO'}   # edit to your actual names
 
 # --- lattice geometry (same as rank-0 lattice) ---
 GRID = cfg.cube_side_len                  # e.g., 11.0
@@ -271,3 +271,4 @@ pc.barrier()
 sim.gatherData()
 sim.saveData()
 sim.analysis.plotData()  # optional
+sim.close()

@@ -42,12 +42,14 @@ cfg.nthreads = 1
 # Recording
 # ------------------------------------------------------------------------------
 
+cfg.recordStep = 0.05
+
 cfg.TEpops = ['TC', 'TCM', 'HTC']
 cfg.TIpops = ['IRE', 'IREM', 'TI', 'TIM']
 
 cfg.allpops = cfg.TEpops + cfg.TIpops
 
-# cfg.recordCells = ['all']
+cfg.recordCells = ['all']
 
 cfg.recordTraces = {'V_soma': {'sec': 'soma', 'loc': 0.5, 'var': 'v'}
                     # 'g_GABAA_NO': {'sec': 'soma', 'loc': 0.5, 'synMech': 'GABAA_NO', 'var': 'g'}
@@ -88,15 +90,26 @@ cfg.addBkgConn = 1.0
 # Analysis and plotting
 # ------------------------------------------------------------------------------
 
-# cfg.analysis['plotTraces'] = {
-#     'include': cfg.allpops,
-#     'timeRange': [0, cfg.duration],
-#     'oneFigPer': 'trace',
-#     'overlay': True,
-#     'saveFig': True,
-#     'showFig': False,
-#     'figSize': (12, 8)
-# }
+cfg.analysis['plotTraces'] = {
+    'include': cfg.allpops,
+    'timeRange': [0, cfg.duration],
+    'oneFigPer': 'trace',
+    'overlay': True,
+    'saveFig': True,
+    'showFig': False,
+    'figSize': (12, 8)
+}
+
+
+cfg.analysis['plotRaster'] = {
+    'include': cfg.allpops, 
+    'saveFig': True, 
+    'showFig': False, 
+    'orderInverse': True, 
+    'figSize': (25, 25),
+    'markerSize': 1
+    } 
+
 
 # ------------------------------------------------------------------------------
 # Synapses

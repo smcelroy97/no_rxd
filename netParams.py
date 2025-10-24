@@ -56,29 +56,17 @@ with open('cells/cellDensity.pkl', 'rb') as fileObj:
     density = pickle.load(fileObj)['density']
 density = {k: [x * cfg.scaleDensity for x in v] for k, v in density.items()}  # Scale densities
 
-# simple spherical cell with a soma section
-cellRule = {'conds': {'cellType': 'voxelhost', 'cellModel': 'HH'},
-            'secs': {'soma': {'geom': {'L': 10, 'diam': 10}, 'mechs': {}}}}
-netParams.cellParams['VoxelHost'] = cellRule
-
-netParams.popParams['VoxelPop'] = {
-    'cellType': 'voxelhost',
-    'cellModel': 'HH',
-    'gridSpacing': 11,
-    'gridDim': [cfg.cube_side_len, cfg.cube_side_len, cfg.cube_side_len]
-}
-
 ### THALAMIC POPULATIONS (from prev model)
 thalDensity = density[('A1', 'PV')][2] * 1.25  # temporary estimate (from prev model)
 
 
-netParams.popParams['TC'] = {'cellType': 'TC', 'cellModel': 'HH_reduced', 'ynormRange': [0.5, 1], 'numCells': 37}
-netParams.popParams['TCM'] = {'cellType': 'TC', 'cellModel': 'HH_reduced', 'ynormRange': [0.5, 1], 'numCells': 50}
-netParams.popParams['HTC'] = {'cellType': 'HTC', 'cellModel': 'HH_reduced', 'ynormRange': [0.5, 1], 'numCells': 12}
-netParams.popParams['IRE'] = {'cellType': 'RE', 'cellModel': 'HH_reduced', 'ynormRange': [0, 0.5], 'numCells': 50}
-netParams.popParams['IREM'] = {'cellType': 'RE', 'cellModel': 'HH_reduced', 'ynormRange': [0, 0.5], 'numCells': 50}
-netParams.popParams['TI'] = {'cellType': 'TI', 'cellModel': 'HH_reduced', 'ynormRange': [0.5, 1], 'numCells': 17}  # Winer & Larue 1996; Huang et al 1999
-netParams.popParams['TIM'] = {'cellType': 'TI', 'cellModel': 'HH_reduced', 'ynormRange': [0.5, 1], 'numCells': 17}  # Winer & Larue 1996; Huang et al 1999
+netParams.popParams['TC'] = {'cellType': 'TC', 'cellModel': 'HH_reduced', 'ynormRange': [0.5, 1], 'numCells': 375}
+netParams.popParams['TCM'] = {'cellType': 'TC', 'cellModel': 'HH_reduced', 'ynormRange': [0.5, 1], 'numCells': 500}
+netParams.popParams['HTC'] = {'cellType': 'HTC', 'cellModel': 'HH_reduced', 'ynormRange': [0.5, 1], 'numCells': 125}
+netParams.popParams['IRE'] = {'cellType': 'RE', 'cellModel': 'HH_reduced', 'ynormRange': [0, 0.5], 'numCells': 500}
+netParams.popParams['IREM'] = {'cellType': 'RE', 'cellModel': 'HH_reduced', 'ynormRange': [0, 0.5], 'numCells': 500}
+netParams.popParams['TI'] = {'cellType': 'TI', 'cellModel': 'HH_reduced', 'ynormRange': [0.5, 1], 'numCells': 175}  # Winer & Larue 1996; Huang et al 1999
+netParams.popParams['TIM'] = {'cellType': 'TI', 'cellModel': 'HH_reduced', 'ynormRange': [0.5, 1], 'numCells': 175}  # Winer & Larue 1996; Huang et al 1999
 
 # ------------------------------------------------------------------------------
 # Synaptic mechanism parameters
@@ -130,9 +118,9 @@ netParams.synMechParams['GABAA_NO'] = {
 }
 
 ESynMech = ['AMPA', 'NMDA']
-ThalIESynMech = ['GABAA_Slow', 'GABAB']
+ThalIESynMech = ['GABAASlow', 'GABAB']
 ThalIISynMech = ['GABAASlow']
-RETCSynMech = ['GABAA_Slow', 'GABAB']
+RETCSynMech = ['GABAA_NO', 'GABAB']
 
 with open('conn/conn.pkl', 'rb') as fileObj:
     connData = pickle.load(fileObj)
@@ -226,7 +214,7 @@ if cfg.addBkgConn:
             'sec': 'soma',
             'loc': 0.5,
             'synMech': ESynMech,
-            'weight': weightBkg[pop],
+            'weight': weightBkg[pop] * 100,
             'synMechWeightFactor': cfg.synWeightFractionEE,
             'delay': cfg.delayBkg}
 
