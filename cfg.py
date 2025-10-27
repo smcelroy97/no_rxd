@@ -36,7 +36,8 @@ cfg.oneSynPerNetcon = False
 cfg.includeParamsLabel = False
 cfg.validateNetParams = True
 cfg.use_coreNEURON = False
-cfg.nthreads = 1    
+cfg.nthreads = 1
+cfg.recordTime = True
 
 # ------------------------------------------------------------------------------
 # Recording
@@ -48,8 +49,6 @@ cfg.TEpops = ['TC', 'TCM', 'HTC']
 cfg.TIpops = ['IRE', 'IREM', 'TI', 'TIM']
 
 cfg.allpops = cfg.TEpops + cfg.TIpops
-
-cfg.recordCells = ['all']
 
 cfg.recordTraces = {'V_soma': {'sec': 'soma', 'loc': 0.5, 'var': 'v'}
                     # 'g_GABAA_NO': {'sec': 'soma', 'loc': 0.5, 'synMech': 'GABAA_NO', 'var': 'g'}
@@ -90,15 +89,15 @@ cfg.addBkgConn = 1.0
 # Analysis and plotting
 # ------------------------------------------------------------------------------
 
-cfg.analysis['plotTraces'] = {
-    'include': cfg.allpops,
-    'timeRange': [0, cfg.duration],
-    'oneFigPer': 'trace',
-    'overlay': True,
-    'saveFig': True,
-    'showFig': False,
-    'figSize': (12, 8)
-}
+# cfg.analysis['plotTraces'] = {
+#     'include': cfg.allpops,
+#     'timeRange': [0, cfg.duration],
+#     'oneFigPer': 'trace',
+#     'overlay': True,
+#     'saveFig': True,
+#     'showFig': False,
+#     'figSize': (12, 8)
+# }
 
 
 cfg.analysis['plotRaster'] = {
@@ -127,15 +126,15 @@ cfg.synWeightFractionThalII = [1.0, 0.0]
 
 cfg.intraThalamicGain = 1.0
 cfg.intraThalamicEEGain = 1.0
-cfg.intraThalamicEIGain = 0.3
-cfg.intraThalamicIEGain = 0.1
+cfg.intraThalamicEIGain = 1.75
+cfg.intraThalamicIEGain = 2.0
 cfg.intraThalamicIIGain = 1.0
 
 # ------------------------------------------------------------------------------
 # NO Params
 # ------------------------------------------------------------------------------
 
-cfg.no_t_half_ms = 1000 # half life of no in ms
+cfg.no_t_half_ms = 1000  # half life of no in ms
 
 # ------------------------------------------------------------------------------
 # Connectivity
@@ -156,5 +155,5 @@ cfg.delayBkg = 5.0  # (ms)
 cfg.startBkg = 0  # start at 0 ms
 cfg.rateBkg = {'exc': 40, 'inh': 40}
 
-cfg.EbkgThalamicGain = 1.0  # 0.392
-cfg.IbkgThalamicGain = 1.0  # 1.96
+cfg.EbkgThalamicGain = 1.75  # 0.392
+cfg.IbkgThalamicGain = 0.25  # 1.96

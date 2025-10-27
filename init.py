@@ -53,9 +53,9 @@ offsets = {
 }
 
 # --- who to target ---
-PRE_OK   = {'IRE', 'IREM'}
-POST_OK  = {'TC', 'TCM', 'HTC'}
-GABA_MECHS = {'RETCSynMech', 'GABAA_NO'}   # edit to your actual names
+PRE_OK   = ['IRE', 'IREM']
+POST_OK  = ['TC', 'TCM', 'HTC']
+GABA_MECHS = ['GABAA_NO']  # edit to your actual names
 
 # --- lattice geometry (same as rank-0 lattice) ---
 GRID = cfg.cube_side_len                  # e.g., 11.0
@@ -77,24 +77,22 @@ freq_targets = []   # (syn_hoc, ix, iy, iz)
 
 for cell in sim.net.cells:  # local postsynaptic cells on this rank
     post_pop = cell.tags.get('pop')
-    if post_pop not in POST_OK:
-        continue
-    x, y, z = cell.tags['x'], cell.tags['y'], cell.tags['z']
-    ix, iy, iz = pos_to_idx(x, y, z)   # anchor at soma; OK for first pass
+    if post_pop in POST_OK:
 
-    for conn in cell.conns:
-        mechs = conn['synMech'] if isinstance(conn['synMech'], list) else [conn['synMech']]
-        if not any(m in GABA_MECHS for m in mechs):
-            continue
-        if pre_pop_of_conn(conn) not in PRE_OK:
-            continue
-        syn = conn.get('hSyn', None)
-        if syn is None:
-            continue
-        # If your GABAA mech has NO amplitude modulation, neutralize it:
-        if hasattr(syn, 'alpha'):  # MyExp2SynBB_NO style
-            syn.alpha = 0.0
-        freq_targets.append((syn, ix, iy, iz))
+        x, y, z = cell.tags['x'], cell.tags['y'], cell.tags['z']
+        ix, iy, iz = pos_to_idx(x, y, z)   # anchor at soma; OK for first pass
+
+        for conn in cell.conns:
+            preGid = conn['preGid']
+            if preGid == 'NetStim':
+                continue
+            connPrePop = sim.net.cells[preGid].tags['pop']
+            if connPrePop in PRE_OK:
+                if conn['synMech'] == 'GABAA_NO':
+                    for synmech in cell.secs['soma']['synMechs']:
+                        if synmech['label'] == 'GABAA_NO':
+                            syn = synmech['hObj']
+                            freq_targets.append((syn, ix, iy, iz))
 
 print(f"[rank {rank}] NO-freq targets on this rank: {len(freq_targets)}")
 
@@ -150,12 +148,12 @@ if rank == 0:
     # optional initial condition / F schedule (center voxel)
     cx, cy, cz = xs[len(xs)//2], ys[len(ys)//2], zs[len(zs)//2]
     center_key = (cx, cy, cz)
-    voxels_rank0[center_key].conc0 = 240.0  # nM, if you want that initial condition
+    voxels_rank0[center_key].conc0 = 0  # nM, if you want that initial condition
 
-    # Example: play any F schedule you want (only on rank 0)
-    tvec = h.Vector([0, 420, 470, 570, 620, cfg.duration])
-    fvec = h.Vector([0,   0, 2.5, 2.5,   0,           0])  # nM/ms
-    fvec.play(voxels_rank0[center_key]._ref_F, tvec, 1)
+    # # Example: play any F schedule you want (only on rank 0)
+    # tvec = h.Vector([0, 420, 470, 570, 620, cfg.duration])
+    # fvec = h.Vector([0,   0, 2.5, 2.5,   0,           0])  # nM/ms
+    # fvec.play(voxels_rank0[center_key]._ref_F, tvec, 1)
 
 pc.barrier()
 
@@ -268,6 +266,7 @@ pc.barrier()
 # -----------------------------------
 # 5) Finish and save/plot with NetPyNE
 # -----------------------------------
+sim.runSim()
 sim.gatherData()
 sim.saveData()
 sim.analysis.plotData()  # optional

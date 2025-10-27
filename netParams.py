@@ -60,13 +60,13 @@ density = {k: [x * cfg.scaleDensity for x in v] for k, v in density.items()}  # 
 thalDensity = density[('A1', 'PV')][2] * 1.25  # temporary estimate (from prev model)
 
 
-netParams.popParams['TC'] = {'cellType': 'TC', 'cellModel': 'HH_reduced', 'ynormRange': [0.5, 1], 'numCells': 375}
-netParams.popParams['TCM'] = {'cellType': 'TC', 'cellModel': 'HH_reduced', 'ynormRange': [0.5, 1], 'numCells': 500}
-netParams.popParams['HTC'] = {'cellType': 'HTC', 'cellModel': 'HH_reduced', 'ynormRange': [0.5, 1], 'numCells': 125}
-netParams.popParams['IRE'] = {'cellType': 'RE', 'cellModel': 'HH_reduced', 'ynormRange': [0, 0.5], 'numCells': 500}
-netParams.popParams['IREM'] = {'cellType': 'RE', 'cellModel': 'HH_reduced', 'ynormRange': [0, 0.5], 'numCells': 500}
-netParams.popParams['TI'] = {'cellType': 'TI', 'cellModel': 'HH_reduced', 'ynormRange': [0.5, 1], 'numCells': 175}  # Winer & Larue 1996; Huang et al 1999
-netParams.popParams['TIM'] = {'cellType': 'TI', 'cellModel': 'HH_reduced', 'ynormRange': [0.5, 1], 'numCells': 175}  # Winer & Larue 1996; Huang et al 1999
+netParams.popParams['TC'] = {'cellType': 'TC', 'cellModel': 'HH_reduced', 'ynormRange': [0.5, 1], 'numCells': 37}
+netParams.popParams['TCM'] = {'cellType': 'TC', 'cellModel': 'HH_reduced', 'ynormRange': [0.5, 1], 'numCells': 50}
+netParams.popParams['HTC'] = {'cellType': 'HTC', 'cellModel': 'HH_reduced', 'ynormRange': [0.5, 1], 'numCells': 12}
+netParams.popParams['IRE'] = {'cellType': 'RE', 'cellModel': 'HH_reduced', 'ynormRange': [0, 0.5], 'numCells': 50}
+netParams.popParams['IREM'] = {'cellType': 'RE', 'cellModel': 'HH_reduced', 'ynormRange': [0, 0.5], 'numCells': 50}
+netParams.popParams['TI'] = {'cellType': 'TI', 'cellModel': 'HH_reduced', 'ynormRange': [0.5, 1], 'numCells': 17}  # Winer & Larue 1996; Huang et al 1999
+netParams.popParams['TIM'] = {'cellType': 'TI', 'cellModel': 'HH_reduced', 'ynormRange': [0.5, 1], 'numCells': 17}  # Winer & Larue 1996; Huang et al 1999
 
 # ------------------------------------------------------------------------------
 # Synaptic mechanism parameters
@@ -113,7 +113,7 @@ netParams.synMechParams['GABAA_NO'] = {
     'tau2': 18.2,
     'e': -80,
     'gmax_base': 1e-3,  # or whatever your MyExp2SynBB expects for weight=1
-    'alpha': 2e-3,  # tune
+    'alpha': 0,  # tune
     'K': 100  # nM, tune
 }
 
@@ -201,11 +201,11 @@ if cfg.addBkgConn:
         weightBkg = json.load(f)
     pops = list(cfg.allpops)
 
-    for pop in ['TC', 'TCM', 'HTC']:
-        weightBkg[pop] *= cfg.EbkgThalamicGain
-
-    for pop in ['IRE', 'IREM', 'TI', 'TIM']:
-        weightBkg[pop] *= cfg.IbkgThalamicGain
+    # for pop in ['TC', 'TCM', 'HTC']:
+    #     weightBkg[pop] *= cfg.EbkgThalamicGain
+    #
+    # for pop in ['IRE', 'IREM', 'TI', 'TIM']:
+    #     weightBkg[pop] *= cfg.IbkgThalamicGain
 
     for pop in pops:
         netParams.stimTargetParams['excBkg->'+pop] = {
@@ -214,7 +214,7 @@ if cfg.addBkgConn:
             'sec': 'soma',
             'loc': 0.5,
             'synMech': ESynMech,
-            'weight': weightBkg[pop] * 100,
+            'weight': weightBkg[pop] * cfg.EbkgThalamicGain,
             'synMechWeightFactor': cfg.synWeightFractionEE,
             'delay': cfg.delayBkg}
 
@@ -224,5 +224,5 @@ if cfg.addBkgConn:
             'sec': 'soma',
             'loc': 0.5,
             'synMech': 'GABAA',
-            'weight': weightBkg[pop],
+            'weight': weightBkg[pop] * cfg.IbkgThalamicGain,
             'delay': cfg.delayBkg}

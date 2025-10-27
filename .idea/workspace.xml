@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c20e5f45-da3f-442c-95aa-576e1a4f545f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/mod/MyExp2SynBB_NO.mod" beforeDir="false" afterPath="$PROJECT_DIR$/mod/MyExp2SynBB_NO.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/singleSim.out" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,32 +46,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python.3D_no_demo.executor": "Debug",
-    "Python.eugenio_test.executor": "Run",
-    "Python.init.executor": "Debug",
-    "Python.lecture_example.executor": "Run",
-    "Python.netParams.executor": "Run",
-    "Python.simple_no_demo.executor": "Debug",
-    "Python.single_cell_no_gabaa_demo.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "full.screen.before.presentation.mode": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/scoot/no_rxd",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "run.code.analysis.last.selected.profile": "aDefault",
-    "settings.editor.selected.configurable": "editor.preferences.inline.completion",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.3D_no_demo.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.eugenio_test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.init.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.lecture_example.executor&quot;: &quot;Run&quot;,
+    &quot;Python.netParams.executor&quot;: &quot;Run&quot;,
+    &quot;Python.simple_no_demo.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.single_cell_no_gabaa_demo.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;full.screen.before.presentation.mode&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/scoot/no_rxd&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;aDefault&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.inline.completion&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Python.single_cell_no_gabaa_demo">
     <configuration name="3D_no_demo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="no_rxd" />
@@ -228,7 +229,9 @@
       <workItem from="1761123867718" duration="4485000" />
       <workItem from="1761148791852" duration="1619000" />
       <workItem from="1761207326329" duration="8678000" />
-      <workItem from="1761296391048" duration="4052000" />
+      <workItem from="1761296391048" duration="6536000" />
+      <workItem from="1761473516208" duration="33000" />
+      <workItem from="1761558361907" duration="6628000" />
     </task>
     <servers />
   </component>
