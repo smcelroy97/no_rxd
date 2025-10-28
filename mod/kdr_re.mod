@@ -1,10 +1,12 @@
-TITLE km.mod
+TITLE kdr_re.mod
  
 COMMENT
- Slow, non-inactivating potassium current for pyramidal cell and interneurons defined in
- Timofeev et. al., 2000, Cerebral Cortex (https://doi.org/10.1093/cercor/10.12.1185) 
- and Bazhenov et. al. 2002 (J Neuro) and 
- Chen et. al., 2012, J. Physiol. (doi:  https://doi.org/10.1113/jphysiol.2012.227462)
+ Delayed rectifying potassium current for RE and TC cells defined in appendix of 
+ Bazhenov 1998 (doi: https://doi.org/10.1152/jn.1998.79.5.2730), and referenced in 
+ Bazhenov et. al. 2002 (J Neuro) and Chen et. al. 2012 (J. Physiol.)
+ In reality, this code apes that from the C++ code accompanying Bazhenov 2002
+ (found here: https://modeldb.science/28189?tab=1) and Krishnan 2016
+ (found here: https://github.com/bazhlab-ucsd/sleep-stage-transition/tree/main)
  This code is adapted from hh.mod distributed with NEURON source code
 ENDCOMMENT
  
@@ -16,15 +18,15 @@ UNITS {
  
 ? interface
 NEURON {
-        SUFFIX km
+        SUFFIX kdr_re
         USEION k READ ek WRITE ik
         RANGE gkbar, gk
         RANGE ninf, ntau
-		:THREADSAFE : assigned GLOBALs will be per thread
+	:THREADSAFE : assigned GLOBALs will be per thread
 }
  
 PARAMETER {
-        gkbar = 0.00001 (S/cm2)	<0,1e9>
+        gkbar = 0.200 (S/cm2)	<0,1e9>
         ek = -95 (mV)
 }
  
@@ -36,17 +38,17 @@ ASSIGNED {
         v (mV)
         :celsius (degC)
 
-		gk (S/cm2)
+	gk (S/cm2)
         ik (mA/cm2)
         ninf
-		ntau (ms)
+	ntau (ms)
 }
  
 ? currents
 BREAKPOINT {
         SOLVE states METHOD cnexp
-        gk = gkbar*n
-		ik = 2.952882641412121*gk*(v - ek) :2.95 is q_T from Timofeev 2000; also, C++ code prescribe 2.3^((36-23)/10)
+        gk = gkbar*n*n*n*n
+		ik = gk*(v - ek) 
 }
  
  
@@ -67,10 +69,10 @@ PROCEDURE rates(v(mV)) {  :Computes rate and other constants at current v.
         LOCAL  a, b, sum
 UNITSOFF
 		:"n" potassium gating 
-        a = 0.001 * vtrap(-(v+30),9)
-        b =  0.001 * vtrap(v+30,9) :note the lack of a negative sign in the first argument to vtrap; also no negative sign in front of entire equation, because of reversed order of denominator
+        a = 0.032*vtrap(-(v+35),5) :to match C++ code, for TC cell replace "35" with "13" (see Vtr and Vtrk in Krishnan 2016 CellSyn.h lines 236-237, currents.h lines 313-314)
+        b =  0.5*exp(-(v+40)/40) :to match C++ code, for TC cell replace "40" with "18" (but only in numerator, NOT denominator)
         sum = a + b
-		ntau = 0.3386521313023745/sum :numerator is 1/2.952882641412121
+		ntau = 1.0/sum
         ninf = a/sum
         
 }

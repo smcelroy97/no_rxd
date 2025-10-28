@@ -1,7 +1,7 @@
-TITLE km.mod
+TITLE kdr.mod
  
 COMMENT
- Slow, non-inactivating potassium current for pyramidal cell and interneurons defined in
+ Delayed rectifying potassium current for pyramidal cell and interneurons defined in
  Timofeev et. al., 2000, Cerebral Cortex (https://doi.org/10.1093/cercor/10.12.1185) 
  and Bazhenov et. al. 2002 (J Neuro) and 
  Chen et. al., 2012, J. Physiol. (doi:  https://doi.org/10.1113/jphysiol.2012.227462)
@@ -16,15 +16,15 @@ UNITS {
  
 ? interface
 NEURON {
-        SUFFIX km
+        SUFFIX kdr
         USEION k READ ek WRITE ik
         RANGE gkbar, gk
         RANGE ninf, ntau
-		:THREADSAFE : assigned GLOBALs will be per thread
+	:THREADSAFE : assigned GLOBALs will be per thread
 }
  
 PARAMETER {
-        gkbar = 0.00001 (S/cm2)	<0,1e9>
+        gkbar = 0.200 (S/cm2)	<0,1e9>
         ek = -95 (mV)
 }
  
@@ -67,8 +67,8 @@ PROCEDURE rates(v(mV)) {  :Computes rate and other constants at current v.
         LOCAL  a, b, sum
 UNITSOFF
 		:"n" potassium gating 
-        a = 0.001 * vtrap(-(v+30),9)
-        b =  0.001 * vtrap(v+30,9) :note the lack of a negative sign in the first argument to vtrap; also no negative sign in front of entire equation, because of reversed order of denominator
+        a = 0.02 * vtrap(-(v-25),9)
+        b =  0.002 * vtrap(v-25,9) :note the lack of a negative sign in the first argument to vtrap; also no negative sign in front of entire equation, because of reversed order of denominator
         sum = a + b
 		ntau = 0.3386521313023745/sum :numerator is 1/2.952882641412121
         ninf = a/sum

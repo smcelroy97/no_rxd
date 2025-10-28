@@ -86,7 +86,7 @@ for cell in sim.net.cells:  # local postsynaptic cells on this rank
             preGid = conn['preGid']
             if preGid == 'NetStim':
                 continue
-            connPrePop = sim.net.cells[preGid].tags['pop']
+            connPrePop = gid2pop[preGid]
             if connPrePop in PRE_OK:
                 if conn['synMech'] == 'GABAA_NO':
                     for synmech in cell.secs['soma']['synMechs']:

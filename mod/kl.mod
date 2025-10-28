@@ -1,48 +1,42 @@
-: $Id: kl.mod,v 1.3 2004/06/07 21:15:08 billl Exp $
+TITLE kL.mod
+ 
 COMMENT
------------------------------------------------------------------------------
-
-  Leak potassium current -- converted to a SUFFIX from kleak.mod
-
-  This mechanism was written to be used as a potassium channel that is
-  open or closed by neuromodulators.  
-
-  A. Destexhe , The Salk Institute, Feb 1994.
-
------------------------------------------------------------------------------
+ Potassium leak current for pyramidal cell and interneurons defined in
+ Timofeev et. al., 2000, Cerebral Cortex (https://doi.org/10.1093/cercor/10.12.1185) 
+ and Bazhenov et. al. 2002 (J Neuro) and 
+ Chen et. al., 2012, J. Physiol. (doi:  https://doi.org/10.1113/jphysiol.2012.227462)
+ NOTE: This mod file uses 'krev' instead of 'ek' because in cortical cells, Bazhenov et. al. used a potassium reversal
+ potential of -95 mV for the potassium leak current, and -90 mV for the other potassium currents
 ENDCOMMENT
-
-INDEPENDENT {t FROM 0 TO 1 WITH 1 (ms)}
-
-NEURON {
-	SUFFIX kl
-        USEION k READ ek WRITE ik VALENCE 1
-	RANGE gmax, i
-        GLOBAL erev
-}
-
+ 
 UNITS {
-	(nA) = (nanoamp)
-	(mV) = (millivolt)
-	(umho) = (micromho)
+        (mA) = (milliamp)
+        (mV) = (millivolt)
+		(S) = (siemens)
 }
-
+ 
+? interface
+NEURON {
+        SUFFIX kL
+        USEION k WRITE ik
+		GLOBAL krev
+		RANGE gkL
+		:THREADSAFE : assigned GLOBALs will be per thread
+}
+ 
 PARAMETER {
-  ek  (mV)
-  gmax	= 4e-4	(S/cm2)		: maximum conductance
-  erev	= -100	(mV)		: reversal potential (potassium)
+        gkL = 0.0000025 (S/cm2)	<0,1e9>
+        krev = -95 (mV)
 }
-
+ 
+ 
 ASSIGNED {
-	v		(mV)		: postsynaptic voltage
-	i 		(mA/cm^2)
-	ik 		(mA/cm^2)
+        v (mV)
+        ik (mA/cm2)
 }
-
-INITIAL {
-}
-
+ 
+? currents
 BREAKPOINT {
-	i = gmax * (v - erev)
-        ik=i
+	ik = gkL*(v - krev) 
 }
+ 
