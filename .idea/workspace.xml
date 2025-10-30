@@ -6,124 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="c20e5f45-da3f-442c-95aa-576e1a4f545f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/init.py" beforeDir="false" afterPath="$PROJECT_DIR$/init.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/APCounter2.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/CA1ika.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/CA1ikdr.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/CA1ina.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/Cadynamics.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/ConductanceSource.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/HH2.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/HH_traub.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/IC.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/ICal.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/IKM.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/IKsin.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/IL.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/IL_gutnick.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/IM_cortex.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/IT.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/IT2.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/Iahp.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/Ican.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/MyExp2SynAlpha.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/MyExp2SynBB.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/MyExp2SynBB_NO.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/MyExp2SynNMDABB.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/Nca.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/ar_traub.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/aux_fun.inc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/beforestep_py.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/bg_cvode.inc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/cad.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/cadad.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/cadecay_destexhe.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/cadyn.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/cagk.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/cal_mh.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/cal_mig.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/can_mig.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/cancr.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/canin.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/caolmw.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/capr.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/cat_mig.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/cat_traub.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/catcb.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/ch_CavL.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/ch_CavN.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/ch_KCaS.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/ch_Kdrfastngf.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/ch_KvAngf.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/ch_KvCaB.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/ch_Navngf.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/ch_leak.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/cp.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/cp2.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/gabab.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/ghk.inc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/h_BS.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/h_harnett.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/h_kole.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/h_migliore.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/hin.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/htc.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/ican_sidi.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/icaolmw.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/icapr.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/iccr.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/iconc_Ca.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/iholmkop.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/iholmw.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/ihpyrkop.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/ikscr.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/ipulse3.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/kBK.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/kahppr.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/kaolmkop.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/kap_BS.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/kapcb.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/kapin.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/kapyrkop.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/kca.mod" beforeDir="false" afterPath="$PROJECT_DIR$/mod/kca.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/kcaolmw.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/kcpr.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/kctin.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/kdmc_BS.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/kdr2_orig.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/kdr_BS.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/kdrbwb.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/kdrcr.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/kdrin.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/kdrolmkop.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/kdrpr.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/kdrpyrkop.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/kl.mod" beforeDir="false" afterPath="$PROJECT_DIR$/mod/kl.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/km.mod" beforeDir="false" afterPath="$PROJECT_DIR$/mod/km.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/kv.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/misc.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/my_exp2syn.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/na_2.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/naf2.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/nafbwb.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/nafcr.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/nafolmkop.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/nafpr.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/nafpyrkop.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/nafx.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/nap_sidi.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/nax_BS.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/naz.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/no_diffusion.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/ntIh.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/ntleak.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/ntt.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/ntt_int.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/parameters.multi" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/pasi.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/savedist.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/tia.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/vecstim.mod" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cellRules.py" beforeDir="false" afterPath="$PROJECT_DIR$/cellRules.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cfg_slp.py" beforeDir="false" afterPath="$PROJECT_DIR$/cfg_slp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/init_slp.py" beforeDir="false" afterPath="$PROJECT_DIR$/init_slp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/netParams_slp.py" beforeDir="false" afterPath="$PROJECT_DIR$/netParams_slp.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,7 +59,7 @@
     "Python.init_slp.executor": "Run",
     "Python.lecture_example.executor": "Run",
     "Python.netParams.executor": "Run",
-    "Python.netParams_slp.executor": "Debug",
+    "Python.netParams_slp.executor": "Run",
     "Python.simple_no_demo.executor": "Debug",
     "Python.single_cell_no_gabaa_demo.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -261,9 +147,6 @@
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -305,9 +188,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.init_slp" />
+        <item itemvalue="Python.init" />
         <item itemvalue="Python.netParams_slp" />
         <item itemvalue="Python.cfg_slp" />
-        <item itemvalue="Python.init" />
         <item itemvalue="Python.single_cell_no_gabaa_demo" />
       </list>
     </recent_temporary>
@@ -346,7 +229,7 @@
       <workItem from="1761296391048" duration="6536000" />
       <workItem from="1761473516208" duration="33000" />
       <workItem from="1761558361907" duration="18514000" />
-      <workItem from="1761650164387" duration="5194000" />
+      <workItem from="1761650164387" duration="25552000" />
     </task>
     <servers />
   </component>
@@ -382,16 +265,6 @@
           <line>30</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/netParams_slp.py</url>
-          <line>9</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/init_slp.py</url>
-          <line>10</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
@@ -405,9 +278,9 @@
     <SUITE FILE_PATH="coverage/no_rxd$lecture_example.coverage" NAME="lecture_example Coverage Results" MODIFIED="1760354244783" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/no_rxd$eugenio_test.coverage" NAME="eugenio_test Coverage Results" MODIFIED="1759846140904" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/no_rxd$3D_no_demo.coverage" NAME="3D_no_demo Coverage Results" MODIFIED="1761055761337" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/no_rxd$init.coverage" NAME="init Coverage Results" MODIFIED="1761650368017" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/no_rxd$init.coverage" NAME="init Coverage Results" MODIFIED="1761750499404" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/no_rxd$single_cell_no_gabaa_demo.coverage" NAME="single_cell_no_gabaa_demo Coverage Results" MODIFIED="1761301199068" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/no_rxd$simple_no_demo.coverage" NAME="simple_no_demo Coverage Results" MODIFIED="1759490486970" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/no_rxd$init_slp.coverage" NAME="init_slp Coverage Results" MODIFIED="1761656876969" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/no_rxd$init_slp.coverage" NAME="init_slp Coverage Results" MODIFIED="1761828905166" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
