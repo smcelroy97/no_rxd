@@ -5,3 +5,5 @@ simOutput/
 *.png
 *_data.pkl
 *.out
+.DS_Store
+.idea/
